@@ -13,6 +13,7 @@ OPTIONS:
    -w      Warning level
    -c      Critical level
    -p      port name
+   -P      path to search.pz2
 EOF
 }
 
@@ -21,7 +22,7 @@ MSG="OK";
 HOST=localhost
 PORT=8004
 
-while getopts "hH:w:c:p:" OPTION
+while getopts "hH:w:c:p:P:" OPTION
 do 
     case $OPTION in
      h)  usage; exit 3;;
@@ -31,6 +32,9 @@ do
      p)  
 	    PORT=$OPTARG
 	    ;;
+     P)
+            PZ2PATH=$OPTARG
+            ;;
      w)  
 	    WARN_LEVEL=$OPTARG
 	    ;;
@@ -40,9 +44,9 @@ do
   esac
 done
 
-#echo $HOST $PORT $WARN_LEVEL $CRIT_LEVEL
+echo $HOST $PORT $WARN_LEVEL $CRIT_LEVEL $PZ2PATH
 
-`wget -q "http://$HOST:$PORT/search.pz2?command=server-status" -O- | xsltproc /etc/pazpar2/server-status-nagios.xsl - 2> /dev/null` 
+`wget -q "http://$HOST:$PORT$PZ2PATH/search.pz2?command=server-status" -O- | xsltproc /etc/pazpar2/server-status-nagios.xsl - 2> /dev/null` 
 
 if [ $? -ne 0 ]
   then
