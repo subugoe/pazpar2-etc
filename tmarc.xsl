@@ -156,17 +156,28 @@
     </xsl:attribute>
   -->
 
-      <xsl:choose>
-        <!-- Only covers the (most common) case of the language code being in 008[35-37].
-             Ignores the rest. -->
-        <xsl:when test="$language='und' or $language='zxx' or $language='   ' or  $language='mul' or $language='|||'">
-        </xsl:when>
-        <xsl:otherwise>
-          <pz:metadata type="language">
-            <xsl:value-of select="$language"/>
-          </pz:metadata>
-        </xsl:otherwise>
-      </xsl:choose>
+      <!-- extract language information from: 008[35-37] ($language variable) and 041 $a fields -->
+      <xsl:if test="$language!='und' and $language!='zxx' and $language!='   ' and $language!='mul' and $language!='|||'">
+        <pz:metadata type="language">
+          <xsl:value-of select="$language"/>
+        </pz:metadata>
+      </xsl:if>
+      <xsl:for-each select="tmarc:d041">
+        <!-- $a main, $b summary, $d audio, $e libretto, $f toc, $g additions, $j subtitles -->
+        <xsl:for-each select="tmarc:sa | tmarc:sb | tmarc:sd | tmarc:se | tmarc:sf | tmarc:sg | tmarc:sj">
+          <xsl:if test=". != $language">
+            <pz:metadata type="language">
+              <!-- for non-standard language codes transport their type in the language-code-scheme attribute -->
+              <xsl:if test="../@i2 = '7' and ../tmarc:s2">
+                <xsl:attribute name="language-code-scheme">
+                  <xsl:value-of select="../tmarc:s2"/>
+                </xsl:attribute>
+              </xsl:if>
+          	  <xsl:value-of select="."/>
+            </pz:metadata>
+          </xsl:if>
+        </xsl:for-each>
+      </xsl:for-each>
 
       <xsl:for-each select="tmarc:c001">
         <pz:metadata type="id">
