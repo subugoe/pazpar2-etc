@@ -91,7 +91,7 @@
         </xsl:when>
         <xsl:when test="$typeofrec='e' or $typeofrec='f'">map</xsl:when>
         <xsl:when test="$typeofrec='c' or $typeofrec='d'">music-score</xsl:when>
-        <xsl:when test="$typeofrec='t'">thesis</xsl:when>
+        <xsl:when test="$typeofrec='t'">manuscript</xsl:when>
         <xsl:when test="$journal_title">article</xsl:when>
         <xsl:when test="($typeofrec='a' or $typeofrec='i') and      ($typeofserial='d' or $typeofserial='w')">web</xsl:when>
         <xsl:when test="$typeofrec='a' and $biblevel='b'">article</xsl:when>
