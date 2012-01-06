@@ -61,7 +61,6 @@
         </xsl:when>
         <xsl:when test="$oclca='h' or $form1='a' or $form1='b' or $form1='c'">microform</xsl:when>
         <xsl:when test="$multipart='a'">multivolume</xsl:when>
-        <xsl:when test="($typeofrec='a' or $typeofrec='t') and $biblevel='m'">book</xsl:when>
         <xsl:when test="$typeofrec='j' or $typeofrec='i'">
           <xsl:text>recording</xsl:text>
           <xsl:choose>
@@ -93,7 +92,8 @@
         <xsl:when test="$typeofrec='c' or $typeofrec='d'">music-score</xsl:when>
         <xsl:when test="$typeofrec='t'">manuscript</xsl:when>
         <xsl:when test="$journal_title">article</xsl:when>
-        <xsl:when test="($typeofrec='a' or $typeofrec='i') and      ($typeofserial='d' or $typeofserial='w')">web</xsl:when>
+        <xsl:when test="($typeofrec='a' or $typeofrec='t') and ($biblevel='m' or $biblevel='a')">book</xsl:when>
+        <xsl:when test="($typeofrec='a' or $typeofrec='i') and ($typeofserial='d' or $typeofserial='w')">web</xsl:when>
         <xsl:when test="$typeofrec='a' and $biblevel='b'">article</xsl:when>
         <xsl:when test="$typeofrec='m'">electronic</xsl:when>
         <xsl:when test="$typeofrec='o'">multiple</xsl:when>
