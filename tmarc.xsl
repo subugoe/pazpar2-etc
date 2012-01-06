@@ -96,6 +96,7 @@
         <xsl:when test="($typeofrec='a' or $typeofrec='i') and      ($typeofserial='d' or $typeofserial='w')">web</xsl:when>
         <xsl:when test="$typeofrec='a' and $biblevel='b'">article</xsl:when>
         <xsl:when test="$typeofrec='m'">electronic</xsl:when>
+        <xsl:when test="$typeofrec='o'">multiple</xsl:when>
         <xsl:when test="$title_medium">
           <xsl:value-of select="translate($title_medium, ' []/:', '')"/>
         </xsl:when>
