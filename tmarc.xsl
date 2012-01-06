@@ -21,21 +21,19 @@
       <xsl:apply-templates/>
     </collection>
   </xsl:template>
+  
   <xsl:template match="tmarc:r">
     <xsl:variable name="title_medium" select="tmarc:d245/tmarc:sh"/>
     <xsl:variable name="journal_title" select="tmarc:d773/tmarc:st"/>
-    <xsl:variable name="electronic_location_url" select="tmarc:d856/tmarc:su"/>
+
     <xsl:variable name="fulltext_a" select="tmarc:d900/tmarc:sa"/>
     <xsl:variable name="fulltext_b" select="tmarc:d900/tmarc:sb"/>
-    <!-- Does not always hit the right substring. The field is not always fixed-width? -->
-    <xsl:variable name="control_lang" select="substring(tmarc:c008, 36, 3)"/>
-    <xsl:variable name="contains110" select="tmarc:d110"/>
-    <xsl:variable name="hasAuthorFields" select="tmarc:d100 or tmarc:d111"/>
+
     <xsl:variable name="typeofrec" select="substring(tmarc:l, 7, 1)"/>
     <xsl:variable name="typeofvm" select="substring(tmarc:c008, 34, 1)"/>
     <xsl:variable name="biblevel" select="substring(tmarc:l, 8, 1)"/>
     <xsl:variable name="multipart" select="substring(tmarc:l, 20, 1)"/>
-    <xsl:variable name="physdes" select="substring(tmarc:c007, 1, 1)"/>
+
     <xsl:variable name="form1" select="substring(tmarc:c008, 24, 1)"/>
     <xsl:variable name="form2" select="substring(tmarc:c008, 30, 1)"/>
     <xsl:variable name="language" select="substring(tmarc:c008, 36, 3)"/>
