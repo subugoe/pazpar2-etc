@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pz="http://www.indexdata.com/pazpar2/1.0" xmlns:tmarc="http://www.indexdata.com/turbomarc" version="1.0">
+<xsl:stylesheet
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:pz="http://www.indexdata.com/pazpar2/1.0"
+  xmlns:tmarc="http://www.indexdata.com/turbomarc" version="1.0">
+  
   <xsl:output indent="yes" method="xml" version="1.0" encoding="UTF-8"/>
+
   <xsl:param name="medium"/>
   <!-- Extract metadata from MARC21/USMARC from streamlined marcxml format 
     http://www.loc.gov/marc/bibliographic/ecbdhome.html -->
+  
   <xsl:template name="record-hook"/>
+  
   <xsl:template match="/">
     <xsl:apply-templates/>
   </xsl:template>
+  
   <xsl:template match="tmarc:collection">
     <collection>
       <xsl:apply-templates/>
@@ -41,7 +49,7 @@
 
     <xsl:variable name="electronic">
       <xsl:choose>
-        <xsl:when test="$form1='s' or $form1='q' or $form1='o' or     $form2='s' or $form2='q' or $form2='o'">
+        <xsl:when test="$form1='s' or $form1='q' or $form1='o' or $form2='s' or $form2='q' or $form2='o'">
           <xsl:text>yes</xsl:text>
         </xsl:when>
         <xsl:otherwise/>
@@ -61,7 +69,7 @@
           <xsl:choose>
             <xsl:when test="$oclcb='d' and $oclcd='f'">-cd</xsl:when>
             <xsl:when test="$oclcb='s'">-cassette</xsl:when>
-            <xsl:when test="$oclcb='d' and $oclcd='a' or $oclcd='b' or        $oclcd='c' or $oclcd='d' or $oclcd='e'">-vinyl</xsl:when>
+            <xsl:when test="$oclcb='d' and $oclcd='a' or $oclcd='b' or $oclcd='c' or $oclcd='d' or $oclcd='e'">-vinyl</xsl:when>
           </xsl:choose>
         </xsl:when>
         <xsl:when test="$typeofrec='g'">
