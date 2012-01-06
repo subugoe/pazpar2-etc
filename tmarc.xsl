@@ -172,7 +172,8 @@
       <xsl:for-each select="tmarc:d041">
         <!-- $a main, $b summary, $d audio, $e libretto, $f toc, $g additions, $j subtitles -->
         <xsl:for-each select="tmarc:sa | tmarc:sb | tmarc:sd | tmarc:se | tmarc:sf | tmarc:sg | tmarc:sj">
-          <xsl:if test=". != $language">
+          <xsl:if test=". != $language and not(../@i2 = '7' and not(../tmarc:s2))">
+            <!-- only add language codes which do not duplicate the one in c008 and, if non-standard, which contain information about their type -->
             <pz:metadata type="language">
               <!-- for non-standard language codes transport their type in the language-code-scheme attribute -->
               <xsl:if test="../@i2 = '7' and ../tmarc:s2">
