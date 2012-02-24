@@ -746,70 +746,15 @@
         </xsl:if>
       </pz:metadata>
       
-      <xsl:for-each select="tmarc:d900/tmarc:sa">
+      <xsl:for-each select="tmarc:d900">
         <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
+          <xsl:for-each select="tmarc:sa | tmarc:sb | tmarc:se | tmarc:sf |
+                              tmarc:si | tmarc:sk | tmarc:sk | tmarc:sq |
+                              tmarc:ss | tmarc:su | tmarc:sy">
+            <xsl:value-of select="."/>
+          </xsl:for-each>
         </pz:metadata>
       </xsl:for-each>
-      <!-- <xsl:if test="$fulltext_a"> <pz:metadata type="fulltext"> <xsl:value-of 
-        select="$fulltext_a"/> </pz:metadata> </xsl:if> -->
-      <xsl:for-each select="tmarc:d900/tmarc:sb">
-        <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
-        </pz:metadata>
-      </xsl:for-each>
-
-      <xsl:for-each select="tmarc:d900/tmarc:se">
-        <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
-        </pz:metadata>
-      </xsl:for-each>
-
-      <xsl:for-each select="tmarc:d900/tmarc:sf">
-        <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
-        </pz:metadata>
-      </xsl:for-each>
-
-      <xsl:for-each select="tmarc:d900/tmarc:si">
-        <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
-        </pz:metadata>
-      </xsl:for-each>
-
-      <xsl:for-each select="tmarc:d900/tmarc:sk">
-        <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
-        </pz:metadata>
-      </xsl:for-each>
-
-      <xsl:for-each select="tmarc:d900/tmarc:sq">
-        <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
-        </pz:metadata>
-      </xsl:for-each>
-
-      <xsl:for-each select="tmarc:d900/tmarc:ss">
-        <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
-        </pz:metadata>
-      </xsl:for-each>
-
-      <xsl:for-each select="tmarc:d900/tmarc:su">
-        <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
-        </pz:metadata>
-      </xsl:for-each>
-
-      <xsl:for-each select="tmarc:d900/tmarc:sy">
-        <pz:metadata type="fulltext">
-          <xsl:value-of select="."/>
-        </pz:metadata>
-      </xsl:for-each>
-
-
-      <!-- <xsl:if test="$fulltext_b"> <pz:metadata type="fulltext"> <xsl:value-of 
-        select="$fulltext_b"/> </pz:metadata> </xsl:if> -->
 
       <pz:metadata type="has-fulltext">
         <xsl:value-of select="$has_fulltext"/>
@@ -895,7 +840,7 @@
         </pz:metadata>      
       </xsl:for-each>
 
-      <xsl:for-each select="tmarc:d948">
+      <xsl:for-each select="tmarc:d948 | tmarc:d991">
         <pz:metadata type="holding">
           <xsl:for-each select="tmarc:s">
             <xsl:if test="position() &gt; 1">
@@ -905,16 +850,7 @@
           </xsl:for-each>
         </pz:metadata>
       </xsl:for-each>
-      <xsl:for-each select="tmarc:d991">
-        <pz:metadata type="holding">
-          <xsl:for-each select="tmarc:s">
-            <xsl:if test="position() &gt; 1">
-              <xsl:text> </xsl:text>
-            </xsl:if>
-            <xsl:value-of select="."/>
-          </xsl:for-each>
-        </pz:metadata>
-      </xsl:for-each>
+      
       <xsl:for-each select="tmarc:d999">
         <pz:metadata type="localid">
           <xsl:choose>
@@ -930,12 +866,15 @@
           </xsl:choose>
         </pz:metadata>
       </xsl:for-each>
+      
       <!-- passthrough id data -->
       <xsl:for-each select="pz:metadata">
         <xsl:copy-of select="."/>
       </xsl:for-each>
+ 
       <!-- other stylesheets importing this might want to define this -->
       <xsl:call-template name="record-hook"/>
+
     </pz:record>
   </xsl:template>
 
