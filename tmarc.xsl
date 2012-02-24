@@ -68,9 +68,7 @@
 
     <xsl:variable name="vmedium">
       <xsl:choose>
-        <xsl:when test="string-length($medium)">
-          <xsl:value-of select="$medium"/>
-        </xsl:when>
+        <xsl:when test="string-length($medium)"><xsl:value-of select="$medium"/></xsl:when>
         <xsl:when test="$oclca='h' or $form1='a' or $form1='b' or $form1='c'">microform</xsl:when>
         <xsl:when test="$multipart='a'">multivolume</xsl:when>
         <xsl:when test="$typeofrec='j' or $typeofrec='i'">
