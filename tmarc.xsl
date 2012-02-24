@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	tmarc.xsl
+	Stylesheet to extract Marc 21 fields from Indexdata’s streamlined
+	turbomarc XML format to an internal metadat model for pazpar2.
+
+	Mostly based on Indexdata’s original tmarc.xsl from
+	http://git.indexdata.com/?p=pazpar2.git;a=blob_plain;f=etc/tmarc.xsl;hb=HEAD
+	
+	In parts modified, extended, streamlined by
+	Sven-S. Porst, SUB Göttingen <porst@sub.uni-goettingen.de>
+	
+	This version can be found in the repository at github:
+	https://github.com/ssp/pazpar2-etc/
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:pz="http://www.indexdata.com/pazpar2/1.0"
@@ -7,8 +21,6 @@
   <xsl:output indent="yes" method="xml" version="1.0" encoding="UTF-8"/>
 
   <xsl:param name="medium"/>
-  <!-- Extract metadata from MARC21/USMARC from streamlined marcxml format 
-    http://www.loc.gov/marc/bibliographic/ecbdhome.html -->
   
   <xsl:template name="record-hook"/>
   
