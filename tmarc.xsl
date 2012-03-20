@@ -375,7 +375,29 @@
           <xsl:value-of select="tmarc:sa"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
+      <!-- Map information:
+           Create the mapscale field, add the scale as its text and
+           the projection/coordinates fields as attributes.
+           Delete the brackets and punctuation surrounding the
+           coordinates string.
+      -->
+      <xsl:for-each select="tmarc:d255">
+        <pz:metadata type="mapscale">
+          <xsl:if test="tmarc:sb">
+            <xsl:attribute name="projection">
+              <xsl:value-of select="tmarc:sb"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:if test="tmarc:sc">
+            <xsl:attribute name="coordinates">
+              <xsl:value-of select="translate(tmarc:sc, '().', '')"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:value-of select="tmarc:sa"/>
+       </pz:metadata>
+      </xsl:for-each>
+
       <xsl:for-each select="tmarc:d260">
         <pz:metadata type="publication-place">
           <xsl:value-of select="tmarc:sa"/>
