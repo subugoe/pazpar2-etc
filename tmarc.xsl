@@ -550,7 +550,15 @@
           </xsl:for-each>
         </pz:metadata>
       </xsl:for-each>
-        
+
+      <xsl:for-each select="tmarc:d810 | tmarc:d830">
+        <xsl:if test="tmarc:sw">
+          <pz:metadata type="parent-id">
+            <xsl:value-of select="tmarc:sw"/>
+          </pz:metadata>
+        </xsl:if>
+      </xsl:for-each>
+
       <xsl:for-each select="tmarc:d856">
         <xsl:choose>
           <xsl:when test="substring(tmarc:su, 1, 18) = 'http://dx.doi.org/'">
