@@ -568,15 +568,18 @@
           </xsl:when>
           <xsl:otherwise>
             <pz:metadata type="electronic-url">
-              <xsl:if test="tmarc:sy|tmarc:s3">
+              <xsl:if test="tmarc:sy|tmarc:s3|tmarc:sa">
                 <xsl:attribute name="name">
                   <xsl:choose>
                     <xsl:when test="tmarc:sy">
                       <xsl:value-of select="tmarc:sy"/>
                     </xsl:when>
-                    <xsl:otherwise>
+                    <xsl:when test="tmarc:s3">
                       <xsl:value-of select="tmarc:s3"/>
-                    </xsl:otherwise>
+                    </xsl:when>
+                    <xsl:when test="tmarc:sa">
+                      <xsl:value-of select="tmarc:sa"/>
+                    </xsl:when>
                   </xsl:choose>
                 </xsl:attribute>
               </xsl:if>
