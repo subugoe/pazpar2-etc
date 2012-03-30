@@ -6,10 +6,10 @@
 
 	Mostly based on Indexdata’s original tmarc.xsl from
 	http://git.indexdata.com/?p=pazpar2.git;a=blob_plain;f=etc/tmarc.xsl;hb=HEAD
-	
+
 	In parts modified, extended, streamlined by
 	Sven-S. Porst, SUB Göttingen <porst@sub.uni-goettingen.de>
-	
+
 	This version can be found in the repository at github:
 	https://github.com/ssp/pazpar2-etc/
 -->
@@ -17,23 +17,23 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:pz="http://www.indexdata.com/pazpar2/1.0"
   xmlns:tmarc="http://www.indexdata.com/turbomarc" version="1.0">
-  
+
   <xsl:output indent="yes" method="xml" version="1.0" encoding="UTF-8"/>
 
   <xsl:param name="medium"/>
-  
+
   <xsl:template name="record-hook"/>
-  
+
   <xsl:template match="/">
     <xsl:apply-templates/>
   </xsl:template>
-  
+
   <xsl:template match="tmarc:collection">
     <collection>
       <xsl:apply-templates/>
     </collection>
   </xsl:template>
-  
+
   <xsl:template match="tmarc:r">
     <xsl:variable name="title_medium" select="tmarc:d245/tmarc:sh"/>
     <xsl:variable name="journal_title" select="tmarc:d773/tmarc:st"/>
@@ -171,7 +171,7 @@
         <pz:metadata type="language">
           <xsl:value-of select="$language"/>
         </pz:metadata>
-      </xsl:if>      
+      </xsl:if>
       <xsl:for-each select="tmarc:d041">
         <!-- $a main, $b summary, $d audio, $e libretto, $f toc, $g additions, $j subtitles -->
         <xsl:for-each select="tmarc:sa | tmarc:sb | tmarc:sd | tmarc:se | tmarc:sf | tmarc:sg | tmarc:sj">
@@ -205,19 +205,19 @@
           <xsl:value-of select="tmarc:sa"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d020">
         <pz:metadata type="isbn">
           <xsl:value-of select="tmarc:sa"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d022">
         <pz:metadata type="issn">
           <xsl:value-of select="tmarc:sa"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d024">
         <xsl:if test="(tmarc:sa) and (tmarc:s2='doi')">
           <pz:metadata type="doi">
@@ -225,13 +225,13 @@
           </pz:metadata>
         </xsl:if>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d027">
         <pz:metadata type="tech-rep-nr">
           <xsl:value-of select="tmarc:sa"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d035">
         <pz:metadata type="system-control-nr">
           <xsl:choose>
@@ -244,7 +244,7 @@
           </xsl:choose>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d100 | tmarc:d700[tmarc:s4='aut']">
         <pz:metadata type="author">
           <xsl:value-of select="tmarc:sa"/>
@@ -256,7 +256,7 @@
           <xsl:value-of select="tmarc:sd"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d700">
         <xsl:if test="not(tmarc:sa = ../tmarc:d100/tmarc:sa) and not(tmarc:s4='aut')">
           <pz:metadata type="other-person">
@@ -264,7 +264,7 @@
           </pz:metadata>
         </xsl:if>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d110">
         <pz:metadata type="corporate-name">
           <xsl:value-of select="tmarc:sa"/>
@@ -276,7 +276,7 @@
           <xsl:value-of select="tmarc:sd"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d111">
         <pz:metadata type="meeting-name">
           <xsl:value-of select="tmarc:sa"/>
@@ -288,7 +288,7 @@
           <xsl:value-of select="tmarc:sd"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d260">
         <pz:metadata type="date">
           <xsl:value-of select="translate(tmarc:sc, 'cp[].', '')"/>
@@ -301,7 +301,7 @@
             <xsl:when test="$date_end_008">
               <xsl:value-of select="concat($date_008,'-',$date_end_008)"/>
             </xsl:when>
-            <xsl:otherwise> 
+            <xsl:otherwise>
               <xsl:value-of select="$date_008"/>
             </xsl:otherwise>
           </xsl:choose>
@@ -325,7 +325,7 @@
           <xsl:value-of select="tmarc:sr"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d245">
         <pz:metadata type="title">
           <xsl:value-of select="tmarc:sa"/>
@@ -369,7 +369,7 @@
           </xsl:if>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d250">
         <pz:metadata type="edition">
           <xsl:value-of select="tmarc:sa"/>
@@ -409,7 +409,7 @@
           <xsl:value-of select="tmarc:sc"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d300">
         <pz:metadata type="physical-extent">
           <xsl:value-of select="tmarc:sa"/>
@@ -433,15 +433,15 @@
           <xsl:value-of select="tmarc:s3"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d440">
         <pz:metadata type="series-title">
           <xsl:value-of select="tmarc:sa"/>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <!--
-        If the multipart variable (leader position 19) is b, the first Field 490 
+        If the multipart variable (leader position 19) is b, the first Field 490
         contains the multivolume work title. If the multivolume work is part of a series,
         the series will be stated in the following 490 field.
       -->
@@ -467,9 +467,9 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
-      
+
       <!-- Note fields
-           [general/500, with/501, dissertation/502, formatted contents/505, 
+           [general/500, with/501, dissertation/502, formatted contents/505,
             event/518, summary/520, geographic coverage/522]
            Concatenate their values with commas in between and write a description field.
            Ignore abstracts (520 with i1=3) which are treated separately below.
@@ -485,8 +485,8 @@
           </xsl:for-each>
         </pz:metadata>
       </xsl:for-each>
-      
-      <!-- Corporate name (710) or meeting name (711): 
+
+      <!-- Corporate name (710) or meeting name (711):
            Join the subfields of these fields with spaces as separators
            so they are reasonably legible and write a description field.
       -->
@@ -501,7 +501,7 @@
         </pz:metadata>
       </xsl:for-each>
 
-      <!-- Abstracts (520 with i1=3) get their own metadata field. 
+      <!-- Abstracts (520 with i1=3) get their own metadata field.
            They are explicitly excluded from becoming descriptions above.
       -->
       <xsl:for-each select="tmarc:d520[@i1='3']">
@@ -530,7 +530,7 @@
         <pz:metadata type="subject">
           <xsl:value-of select="tmarc:sa"/>
         </pz:metadata>
-        
+
         <pz:metadata type="subject-long">
           <xsl:for-each select="node()/text()">
             <xsl:if test="position() &gt; 1">
@@ -546,7 +546,7 @@
               <xsl:otherwise>
                 <xsl:value-of select="$value"/>
               </xsl:otherwise>
-            </xsl:choose> 
+            </xsl:choose>
           </xsl:for-each>
         </pz:metadata>
       </xsl:for-each>
@@ -603,7 +603,7 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d773">
         <pz:metadata type="citation">
           <xsl:for-each select="*">
@@ -634,7 +634,7 @@
               <xsl:text> </xsl:text>
             </xsl:for-each>
           </xsl:variable>
-          
+
           <pz:metadata type="journal-subpart">
             <xsl:value-of select="normalize-space($subpart)"/>
           </pz:metadata>
@@ -675,7 +675,7 @@
             <!-- volume -->
             <xsl:if test="string-length($volume) &gt; 0">
               <pz:metadata type="volume-number">
-                <xsl:value-of select="$volume"/>       
+                <xsl:value-of select="$volume"/>
               </pz:metadata>
             </xsl:if>
             <!-- issue -->
@@ -692,7 +692,7 @@
             </xsl:if>
           </xsl:if> <!-- not(tmarc:sq) -->
         </xsl:if> <!-- tmarc:sg -->
-        
+
         <!--
           Evaluate Marc 773 $q for article page numbers.
           The field contains a string of the form
@@ -728,7 +728,7 @@
           </xsl:variable>
           <xsl:variable name="issue" select="normalize-space(substring-after($volumeIssue, ':'))"/>
           <xsl:variable name="pages" select="normalize-space(substring-after(tmarc:sq, '&lt;'))"/>
-                    
+
           <!-- volume -->
           <xsl:if test="string-length($volume) &gt; 0">
             <pz:metadata type="volume-number">
@@ -748,9 +748,9 @@
             </pz:metadata>
           </xsl:if>
         </xsl:if> <!-- tmarc:sq -->
-        
+
       </xsl:for-each> <!-- tmarc:d773 -->
- 
+
       <xsl:for-each select="tmarc:d852">
         <xsl:if test="tmarc:sy">
           <pz:metadata type="publicnote">
@@ -778,7 +778,7 @@
           <xsl:text> (electronic)</xsl:text>
         </xsl:if>
       </pz:metadata>
-      
+
       <xsl:for-each select="tmarc:d900">
         <pz:metadata type="fulltext">
           <xsl:for-each select="tmarc:sa | tmarc:sb | tmarc:se | tmarc:sf |
@@ -870,7 +870,7 @@
             </xsl:when>
             <xsl:otherwise>PAZPAR2_NULL_VALUE</xsl:otherwise>
           </xsl:choose>
-        </pz:metadata>      
+        </pz:metadata>
       </xsl:for-each>
 
       <xsl:for-each select="tmarc:d948 | tmarc:d991">
@@ -883,7 +883,7 @@
           </xsl:for-each>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <xsl:for-each select="tmarc:d999">
         <pz:metadata type="localid">
           <xsl:choose>
@@ -899,12 +899,12 @@
           </xsl:choose>
         </pz:metadata>
       </xsl:for-each>
-      
+
       <!-- passthrough id data -->
       <xsl:for-each select="pz:metadata">
         <xsl:copy-of select="."/>
       </xsl:for-each>
- 
+
       <!-- other stylesheets importing this might want to define this -->
       <xsl:call-template name="record-hook"/>
 
