@@ -245,6 +245,37 @@
         </pz:metadata>
       </xsl:for-each>
 
+      <!-- DDC -->
+      <xsl:for-each select="tmarc:d082">
+        <pz:metadata type="classification-ddc">
+          <xsl:value-of select="tmarc:sa"/>
+        </pz:metadata>
+      </xsl:for-each>
+
+      <!-- Marc 084 contains generic classification numbers with the
+           classification name in $2. Turn these into metadata fields with
+           name classification-XXX where XXX is the content of $2.
+           Create a new pazpar2 metadata field for each $a subfield.
+      -->
+      <xsl:for-each select="tmarc:d084">
+		<xsl:variable name="classification-name">
+          <xsl:value-of select="tmarc:s2"/>
+		</xsl:variable>
+		<xsl:for-each select="tmarc:sa">
+          <pz:metadata>
+	        <xsl:attribute name="type">
+              <xsl:text>classification</xsl:text>
+              <xsl:if test="$classification-name">
+                <xsl:text>-</xsl:text>
+                <xsl:value-of select="$classification-name"/>
+              </xsl:if>
+	        </xsl:attribute>
+            <xsl:value-of select="."/>
+          </pz:metadata>
+        </xsl:for-each>
+      </xsl:for-each>
+
+
       <xsl:for-each select="tmarc:d100 | tmarc:d700[tmarc:s4='aut']">
         <pz:metadata type="author">
           <xsl:value-of select="tmarc:sa"/>

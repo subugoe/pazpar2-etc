@@ -12,6 +12,9 @@ Indexdata’s great [tmarc.xsl](http://git.indexdata.com/?p=pazpar2.git;a=blob;f
 * put auxiliary information about URLs into their metadata tags attributes rather than into separate metadata tags
 * map more Marc 5XX fields to `description`
 * map Marc 520 with ind1=3 to `abstract` field
+* classification information:
+	* map Marc 082 to the `classification-ddc` field
+	* map Marc 084 to the `classification-XXX` field where `XXX`is the classification name given in $2
 * media types:
 	* improved microform recognition
 	* change thesis media type to manuscript
