@@ -267,7 +267,7 @@
               <xsl:text>classification</xsl:text>
               <xsl:if test="$classification-name">
                 <xsl:text>-</xsl:text>
-                <xsl:value-of select="$classification-name"/>
+                <xsl:value-of select="translate($classification-name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
               </xsl:if>
 	        </xsl:attribute>
             <xsl:value-of select="."/>
