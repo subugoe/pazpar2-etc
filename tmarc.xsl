@@ -518,12 +518,15 @@
       </xsl:for-each>
 
       <!-- Corporate name (710) or meeting name (711):
-           Join the subfields of these fields with spaces as separators
-           so they are reasonably legible and write a description field.
+           Join the (non-control) subfields of these fields with spaces
+           as separators so they are reasonably legible and write into
+           a description field.
       -->
       <xsl:for-each select="tmarc:d710 | tmarc:d711">
         <pz:metadata type="description">
-          <xsl:for-each select="./*">
+          <xsl:for-each select="./*[local-name() != 's0' and local-name() != 's3'
+                                    and local-name() != 's5' and local-name() != 's6'
+                                    and local-name() != 's8']">
             <xsl:value-of select="text()"/>
             <xsl:if test="position()!=last() and .!=''">
               <xsl:text> </xsl:text>
