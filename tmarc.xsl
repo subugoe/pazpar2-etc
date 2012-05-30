@@ -662,6 +662,12 @@
             <xsl:value-of select="tmarc:sx"/>
           </pz:metadata>
         </xsl:if>
+        <!-- ISBN, can appear for essays in a book -->
+        <xsl:if test="tmarc:sz">
+          <pz:metadata type="isbn">
+            <xsl:value-of select="tmarc:sz"/>
+          </pz:metadata>
+        </xsl:if>
         <!-- title: $parent-title combines $a and $t -->
         <xsl:if test="$parent-title">
           <pz:metadata type="journal-title">
