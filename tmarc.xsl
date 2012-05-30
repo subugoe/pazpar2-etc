@@ -603,11 +603,17 @@
         </xsl:if>
       </xsl:for-each>
 
+      <!-- Links: 856, with an attempt to try and isolate DOIs and URNs -->
       <xsl:for-each select="tmarc:d856">
         <xsl:choose>
           <xsl:when test="substring(tmarc:su, 1, 18) = 'http://dx.doi.org/'">
             <pz:metadata type="doi">
               <xsl:value-of select="substring-after(tmarc:su, 'http://dx.doi.org/')"/>
+            </pz:metadata>
+          </xsl:when>
+          <xsl:when test="substring(tmarc:su, 1, 4) = 'urn:'">
+            <pz:metadata type="urn">
+              <xsl:value-of select="tmarc:su"/>
             </pz:metadata>
           </xsl:when>
           <xsl:otherwise>
