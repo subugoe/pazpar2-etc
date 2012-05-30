@@ -36,7 +36,15 @@
 
   <xsl:template match="tmarc:r">
     <xsl:variable name="title_medium" select="tmarc:d245/tmarc:sh"/>
-    <xsl:variable name="journal_title" select="tmarc:d773/tmarc:st"/>
+
+    <!-- Assemble the parent’s title from 773 $a and $t. -->
+    <xsl:variable name="parent-title">
+      <xsl:value-of select="tmarc:d773/tmarc:sa"/>
+      <xsl:if test="tmarc:d773/tmarc:sa and tmarc:d773/tmarc:st">
+        <xsl:text>: </xsl:text>
+	  </xsl:if>
+      <xsl:value-of select="tmarc:d773/tmarc:st"/>
+    </xsl:variable>
 
     <xsl:variable name="fulltext_a" select="tmarc:d900/tmarc:sa"/>
     <xsl:variable name="fulltext_b" select="tmarc:d900/tmarc:sb"/>
@@ -101,7 +109,7 @@
         <xsl:when test="$typeofrec='e' or $typeofrec='f'">map</xsl:when>
         <xsl:when test="$typeofrec='c' or $typeofrec='d'">music-score</xsl:when>
         <xsl:when test="$typeofrec='t'">manuscript</xsl:when>
-        <xsl:when test="$journal_title">article</xsl:when>
+        <xsl:when test="string-length($parent-title) &gt; 0">article</xsl:when>
         <xsl:when test="($typeofrec='a' or $typeofrec='t') and ($biblevel='m' or $biblevel='a')">book</xsl:when>
         <xsl:when test="($typeofrec='a' or $typeofrec='i') and ($typeofserial='d' or $typeofserial='w')">web</xsl:when>
         <xsl:when test="$typeofrec='a' and $biblevel='b'">article</xsl:when>
@@ -641,28 +649,33 @@
       </xsl:for-each>
 
       <xsl:for-each select="tmarc:d773">
+        <!-- full citation -->
         <pz:metadata type="citation">
           <xsl:for-each select="*">
             <xsl:value-of select="normalize-space(.)"/>
             <xsl:text> </xsl:text>
           </xsl:for-each>
         </pz:metadata>
+        <!-- ISSN -->
         <xsl:if test="tmarc:sx">
           <pz:metadata type="issn">
             <xsl:value-of select="tmarc:sx"/>
           </pz:metadata>
         </xsl:if>
-        <xsl:if test="tmarc:st">
+        <!-- title: $parent-title combines $a and $t -->
+        <xsl:if test="$parent-title">
           <pz:metadata type="journal-title">
-            <xsl:value-of select="tmarc:st"/>
+            <xsl:value-of select="$parent-title"/>
           </pz:metadata>
         </xsl:if>
+        <!-- short title -->
         <xsl:if test="tmarc:sp">
           <pz:metadata type="journal-title-abbrev">
             <xsl:value-of select="tmarc:sp"/>
           </pz:metadata>
         </xsl:if>
 
+        <!-- if necessary evaluate volume/pages information from $g -->
         <xsl:if test="tmarc:sg">
           <xsl:variable name="subpart">
             <xsl:for-each select="tmarc:sg">
