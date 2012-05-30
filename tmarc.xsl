@@ -384,14 +384,16 @@
         <xsl:variable name="number-info">
           <xsl:for-each select="tmarc:sn|tmarc:sp">
             <xsl:value-of select="."/>
-            <xsl:choose>
-              <xsl:when test="name(.)='sn' and name(following-sibling::*[1])='sp'">
-                <xsl:text>:</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>.</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
+            <xsl:if test="not(contains(',.;:' ,substring(., string-length(.), 1)))">
+              <xsl:choose>
+                <xsl:when test="name(.)='sn' and name(following-sibling::*[1])='sp'">
+                  <xsl:text>:</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>.</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:if>
             <xsl:text> </xsl:text>
           </xsl:for-each>
         </xsl:variable>
