@@ -597,7 +597,14 @@
         </pz:metadata>
       </xsl:for-each>
 
-      <xsl:for-each select="tmarc:d810 | tmarc:d830">
+
+      <!--
+        Grab potential parent-id from 800/810/830 $w.
+        Parent links can occur in these fields (corresponding to the parent items mentioned
+        in 490 fields or 245) as well as in 773 $w.
+        There should be at most one parent-id.
+      -->
+      <xsl:for-each select="tmarc:d800 | tmarc:d810 | tmarc:d830">
         <xsl:if test="tmarc:sw">
           <pz:metadata type="parent-id">
             <xsl:value-of select="tmarc:sw"/>
@@ -686,6 +693,12 @@
         <xsl:if test="tmarc:sp">
           <pz:metadata type="journal-title-abbrev">
             <xsl:value-of select="tmarc:sp"/>
+          </pz:metadata>
+        </xsl:if>
+        <!-- parent ID -->
+        <xsl:if test="tmarc:sw">
+          <pz:metadata type="parent-id">
+            <xsl:value-of select="tmarc:sw"/>
           </pz:metadata>
         </xsl:if>
 
