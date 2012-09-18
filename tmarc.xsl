@@ -276,18 +276,18 @@
            Create a new pazpar2 metadata field for each $a subfield.
       -->
       <xsl:for-each select="tmarc:d084">
-		<xsl:variable name="classification-name">
+        <xsl:variable name="classification-name">
           <xsl:value-of select="tmarc:s2"/>
-		</xsl:variable>
-		<xsl:for-each select="tmarc:sa">
+        </xsl:variable>
+        <xsl:for-each select="tmarc:sa">
           <pz:metadata>
-	        <xsl:attribute name="type">
+            <xsl:attribute name="type">
               <xsl:text>classification</xsl:text>
               <xsl:if test="$classification-name">
                 <xsl:text>-</xsl:text>
                 <xsl:value-of select="translate($classification-name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
               </xsl:if>
-	        </xsl:attribute>
+            </xsl:attribute>
             <xsl:value-of select="."/>
           </pz:metadata>
         </xsl:for-each>
