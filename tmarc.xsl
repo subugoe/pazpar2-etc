@@ -226,10 +226,15 @@
         </xsl:for-each>
       </xsl:for-each>
 
+      <!-- ISSN should have the form »XXXX-XXXX« but some records
+           append a note »XXXX-XXXX (Note)« which does not conform to the standard.
+           Strip everything beyond the 9th character and normalise space to also
+           cope with records where the middle dash is missing.
+      -->
       <xsl:for-each select="tmarc:d022">
         <xsl:for-each select="tmarc:sa">
           <pz:metadata type="issn">
-            <xsl:value-of select="."/>
+            <xsl:value-of select="normalize-space(substring(., 1, 9))"/>
           </pz:metadata>
         </xsl:for-each>
       </xsl:for-each>
