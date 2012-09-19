@@ -218,6 +218,17 @@
         </xsl:for-each>
       </xsl:for-each>
 
+      <xsl:for-each select="tmarc:d016">
+        <pz:metadata type="record-control-number">
+          <xsl:if test="@i1 = '7' and tmarc:s2">
+            <xsl:attribute name="source">
+              <xsl:value-of select="tmarc:s2"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:value-of select="tmarc:sa"/>
+        </pz:metadata>
+      </xsl:for-each>
+
       <xsl:for-each select="tmarc:d020">
         <xsl:for-each select="tmarc:sa">
           <pz:metadata type="isbn">
