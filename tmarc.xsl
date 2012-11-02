@@ -373,9 +373,9 @@
       </xsl:for-each>
 
       <xsl:for-each select="tmarc:d260">
-        <xsl:for-each select="tmarc:sd">
+        <xsl:for-each select="tmarc:sc">
           <pz:metadata type="date">
-            <xsl:value-of select="translate(tmarc:sc, 'cp[].', '')"/>
+            <xsl:value-of select="translate(., 'cp[].', '')"/>
           </pz:metadata>
         </xsl:for-each>
       </xsl:for-each>
@@ -480,7 +480,7 @@
       <xsl:for-each select="tmarc:d250">
         <xsl:for-each select="tmarc:sa">
           <pz:metadata type="edition">
-            <xsl:value-of select="tmarc:sa"/>
+            <xsl:value-of select="."/>
           </pz:metadata>
         </xsl:for-each>
       </xsl:for-each>
