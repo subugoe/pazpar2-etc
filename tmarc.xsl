@@ -380,7 +380,7 @@
         </xsl:for-each>
       </xsl:for-each>
 
-      <xsl:if test="string-length($date_008) &gt; 0 and not(tmarc:d260)">
+      <xsl:if test="string-length($date_008) &gt; 0 and not(tmarc:d260/tmarc:sc)">
         <pz:metadata type="date">
           <xsl:choose>
             <xsl:when test="$date_end_008">
