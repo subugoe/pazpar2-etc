@@ -41,8 +41,11 @@
   </xsl:template>
 
   <xsl:template match="arr">
-    <xsl:for-each select="str|float">
+    <xsl:for-each select="str">
       <xsl:call-template name="string"/>
+    </xsl:for-each>
+    <xsl:for-each select="float">
+      <xsl:call-template name="float"/>
     </xsl:for-each>
   </xsl:template>
 
