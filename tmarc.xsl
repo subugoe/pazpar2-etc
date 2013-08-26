@@ -115,9 +115,6 @@
         <xsl:when test="$typeofrec='a' and $biblevel='b'">article</xsl:when>
         <xsl:when test="$typeofrec='m'">electronic</xsl:when>
         <xsl:when test="$typeofrec='o'">multiple</xsl:when>
-        <xsl:when test="$title_medium">
-          <xsl:value-of select="translate($title_medium, ' []/:', '')"/>
-        </xsl:when>
         <xsl:otherwise>
           <xsl:text>other</xsl:text>
         </xsl:otherwise>
