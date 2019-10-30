@@ -1,3 +1,6 @@
+# Repository moved!
+The new location is at [GWDG GitLab](https://gitlab.gwdg.de/subugoe/pazpar2/pazpar2-etc).
+
 # Modifications of Index Data’s etc files for pazpar2
 This repository contains modified copies of [Index Data](http://www.indexdata.com/)’s configuration files for pazpar2 from the [»etc« folder](http://git.indexdata.com/?p=pazpar2.git;a=tree;f=etc;) in the pazpar2 project.
 
